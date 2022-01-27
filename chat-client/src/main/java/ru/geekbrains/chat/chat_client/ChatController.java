@@ -54,16 +54,20 @@ public class ChatController implements Initializable {
         if(massage.isBlank()){
             return;
         }
-        mainChatArea.appendText(massage+System.lineSeparator());
+        var recipient=contactList.getSelectionModel().getSelectedItems();
+        mainChatArea.appendText(recipient+": "+ massage+System.lineSeparator());
         inputField.clear();
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         var contacts= new ArrayList<String>();
+        contacts.add("ALL");
         for (int i = 0; i < 10; i++) {
             contacts.add("contacts#"+(i+1));
         }
         contactList.setItems(FXCollections.observableList(contacts));
+        contactList.getSelectionModel().selectFirst();
+
     }
 }
